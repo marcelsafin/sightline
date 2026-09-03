@@ -171,7 +171,8 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
       Google login). Everything to paste is in `submission/VIDEO_UPLOAD.md`.
 - [x] T021 DEVPOST Source URL filled (with "set to public before submitting").
 - [ ] T022 DEVPOST Demo video URL — after T020.
-- [ ] T023 Final DEVPOST read — after T022.
+- [x] T023 Final DEVPOST read done (claims verified incl. AbortController cleanup;
+      maintainer notes moved to HTML comment). Only the video URL line remains.
 - [ ] T024 **[USER]** Flip repo public (`gh repo edit marcelsafin/sightline --visibility public --accept-visibility-change-consequences`), then submit on Devpost.
 - [x] T025 `submission/RUNBOOK.md` written.
 - [x] T026 Prod headers 4/4 match `public/_headers` (recorded in RUNBOOK).

@@ -83,5 +83,15 @@ and expert accessibility testing.
 ## Submission links
 
 - Live app: https://sightline-5vu.pages.dev
-- Source: https://github.com/marcelsafin/sightline (MIT; set to public before submitting)
+- Source: https://github.com/marcelsafin/sightline
 - Demo video: add public YouTube URL
+
+<!--
+Maintainer notes — do not paste into Devpost:
+- Repository is PRIVATE until you flip it:
+  gh repo edit marcelsafin/sightline --visibility public --accept-visibility-change-consequences
+  Confirm logged-out that the About panel shows "MIT license" before submitting.
+- Video: upload per submission/VIDEO_UPLOAD.md, then replace the line above.
+- Devpost "Built with": React, TypeScript, Vite, axe-core, WebMCP, Cloudflare Pages.
+-->
+
