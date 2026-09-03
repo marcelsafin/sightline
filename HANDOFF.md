@@ -72,11 +72,9 @@ Implementation and production deployment are complete.
 - Impeccable fidelity verdict: `ship`; remaining clear.
 - `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json`, and the workbench
   surface brief now record product and visual truth.
-- Previous narrated demo shows the superseded Rosa variant and must be
-  regenerated before YouTube upload:
-  `~/.copilot/session-state/4a61ba03-ede2-47a7-9dbd-3dba9e384bee/files/sightline-video-rosa/sightline-demo-rosa.mp4`
-- YouTube caption sidecar:
-  `~/.copilot/session-state/4a61ba03-ede2-47a7-9dbd-3dba9e384bee/files/sightline-video-rosa/captions.srt`
+- Earlier narrated demos (Liquid Glass, Rosa) show superseded UIs and must not
+  be uploaded. The current-build recording is described in
+  `submission/VIDEO_UPLOAD.md` (kept in the session workspace, not in the repo).
 
 ## Option C — Copilot for pages, multi-pack — 2026-09-02 (DONE)
 
