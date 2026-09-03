@@ -187,6 +187,11 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
 
 ### Resume here — what only you can do
 
+**Deadline extended by Devpost: 2026-09-04 01:00 PDT = 10:00 CEST.**
+License detection confirmed 2026-09-04 00:20 (GraphQL + REST → MIT); the About
+panel will show "MIT license" the moment the repository is public.
+
+
 1. **Upload the video** (public) using `submission/VIDEO_UPLOAD.md`; paste the
    URL into `submission/DEVPOST.md` ("Demo video:").
 2. **Flip the repo public** right before submitting:
