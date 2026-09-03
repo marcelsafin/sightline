@@ -1,0 +1,14 @@
+[01 — Baseline]
+Most page audits end with a report. AI assistants usually work somewhere else, on a copy, and tell you afterwards what they changed. Sightline puts the person, the agent and the live page in one workspace, connected through WebMCP. The agent does not guess at buttons; the page declares nine structured tools. It starts by calling list packs: accessibility, SEO and performance. Then scan page finds twenty-three problems — fourteen accessibility, five SEO, four performance — for a transparent overall score of fifty-four.
+
+[02 — The agent has to author]
+The agent takes the highest-impact issue: a control whose ARIA role is misspelled. It calls highlight issue, so we both see the exact live element. Then it calls propose fix — and Sightline refuses to guess the role. It returns a needs-input response with the surrounding markup and nearby copy. The agent reads role equals b-u-t-o-n, understands the intent, and calls again with button. The engine validates against the list of real roles, and the patch says who authored what, next to the evidence the engine measured. There is no confidence score, because nobody measured one.
+
+[03 — Human checkpoint]
+When the agent calls apply fix, the tool does not silently change the page. The call stays open, and this sheet appears: Your call. I can see the exact before and after, keep the current page, or approve. The consent step is inside the WebMCP tool execution itself. I approve.
+
+[04 — Verification]
+Sightline changes the live DOM, runs the scan again, and returns the new score to the agent — fifty-six. Contrast is measured by real luminance and darkened along the colour's own hue until it passes. Heading levels come from the live document outline. Every forward change goes through this gate; undo only reverses what a person already approved.
+
+[05 — Completion]
+After the same loop across all three packs, the overall score reaches one hundred, and each pack reads one hundred. Twenty-three approved changes sit in a reversible history, and export patch hands back only the work a person said yes to — as a diff or a report. This is not a claim of automatic compliance. It is human judgment plus agent speed, on the real page, with the browser as shared context. That is what WebMCP makes possible.

@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-02T12:45:00Z",
+  "title": "Design System: Sightline v5",
+  "extensions": {
+    "colorMeta": {
+      "system-blue": {
+        "role": "primary",
+        "displayName": "System Blue",
+        "canonical": "#0071e3",
+        "tonalRamp": ["#001b38", "#00376f", "#0058b0", "#0071e3", "#3395ff", "#7abaff", "#b8dcff", "#edf7ff"]
+      },
+      "verified-green": {
+        "role": "secondary",
+        "displayName": "Verified Green",
+        "canonical": "#34c759",
+        "tonalRamp": ["#0c3518", "#155a29", "#248a3d", "#34c759", "#71d88b", "#a9e8ba", "#d8f6df", "#f0fcf3"]
+      },
+      "system-field": {
+        "role": "neutral",
+        "displayName": "System Field",
+        "canonical": "#f2f2f7",
+        "tonalRamp": ["#1c1c1e", "#4a4a4f", "#6a6a70", "#8e8e93", "#c7c7cc", "#dedee3", "#f2f2f7", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Fixture Display",
+        "purpose": "Stride for Life hero only."
+      },
+      "body": {
+        "displayName": "System Body",
+        "purpose": "Human guidance, controls, and issue titles."
+      },
+      "evidence": {
+        "displayName": "WebMCP Evidence",
+        "purpose": "Rules, selectors, tools, arguments, and diffs."
+      }
+    },
+    "shadows": [
+      {
+        "name": "page",
+        "value": "0 1px 2px rgb(0 0 0 / 5%), 0 14px 44px rgb(0 0 0 / 9%)",
+        "purpose": "Separate the audited page from the system field."
+      },
+      {
+        "name": "approval",
+        "value": "0 1px 3px rgb(0 0 0 / 8%), 0 18px 50px rgb(0 0 0 / 22%)",
+        "purpose": "Lift the human decision while preserving page context."
+      }
+    ],
+    "motion": [
+      {
+        "name": "sheet",
+        "value": "260ms cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "Approval rises from the bottom of the page."
+      },
+      {
+        "name": "target",
+        "value": "280ms cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "Move focus between live DOM elements."
+      }
+    ],
+    "breakpoints": [
+      { "name": "stacked", "value": "980px" },
+      { "name": "compact", "value": "700px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Watch Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Full-width rail action that starts or resumes agent work.",
+      "html": "<button class=\"ds-watch\">Watch the agent work</button>",
+      "css": ".ds-watch{width:100%;height:46px;border:0;border-radius:999px;background:#0071e3;color:#fff;font:500 16px system-ui;box-shadow:0 1px 2px rgba(0,60,120,.24)}.ds-watch:hover{background:#0058b0}.ds-watch:focus-visible{outline:3px solid #0071e3;outline-offset:3px}"
+    },
+    {
+      "name": "Review Segments",
+      "kind": "nav",
+      "refersTo": "segmented-control",
+      "description": "Issues and Agent log share one compact control.",
+      "html": "<div class=\"ds-segments\"><button class=\"active\">Issues · 14</button><button>Agent log</button></div>",
+      "css": ".ds-segments{display:flex;gap:2px;padding:2px;border-radius:10px;background:rgba(120,120,128,.12)}.ds-segments button{height:30px;flex:1;border:0;border-radius:8px;background:transparent;font:500 13.5px system-ui}.ds-segments button.active{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1)}"
+    },
+    {
+      "name": "Issue Card",
+      "kind": "card",
+      "refersTo": "issue-card",
+      "description": "White rail group containing expandable barrier rows.",
+      "html": "<article class=\"ds-issue\"><span>01</span><div><strong>The hero photo has no description</strong><code>image-alt · critical</code></div><b>›</b></article>",
+      "css": ".ds-issue{display:grid;grid-template-columns:20px 1fr auto;gap:11px;align-items:center;padding:12px 14px;border-bottom:.5px solid rgba(60,60,67,.13);background:#fff}.ds-issue span,.ds-issue code{color:#6a6a70;font:400 12px ui-monospace,Menlo,monospace}.ds-issue strong{display:block;font:500 14.5px/1.35 system-ui}.ds-issue b{color:#c0c0c6}"
+    },
+    {
+      "name": "Human Approval Sheet",
+      "kind": "custom",
+      "refersTo": "approval-sheet",
+      "description": "Bottom sheet that blocks mutation until Skip or Approve.",
+      "html": "<section class=\"ds-sheet\"><i></i><strong>Your call</strong><h3>Add meaningful alternative text</h3><p>Nothing changes until you approve.</p><button>Approve A</button></section>",
+      "css": ".ds-sheet{padding:8px 22px 16px;border-radius:22px;background:rgba(255,255,255,.88);box-shadow:0 18px 50px rgba(0,0,0,.22);backdrop-filter:blur(28px);font-family:system-ui}.ds-sheet i{display:block;width:38px;height:5px;margin:0 auto 12px;border-radius:999px;background:rgba(60,60,67,.22)}.ds-sheet strong{color:#b25000}.ds-sheet h3{font-size:20px}.ds-sheet button{height:44px;padding:0 26px;border:0;border-radius:999px;background:#0071e3;color:#fff}"
+    },
+    {
+      "name": "Stride Pill",
+      "kind": "chip",
+      "description": "System-blue selected amount or neutral compact choice.",
+      "html": "<button class=\"ds-pill\">$20</button>",
+      "css": ".ds-pill{height:38px;padding:0 18px;border:0;border-radius:999px;background:#0071e3;color:#fff;font:500 14px system-ui}.ds-pill:focus-visible{outline:3px solid #0071e3;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Human Review Surface",
+    "overview": "Sightline v5 is a calm Apple-style workbench built around one relationship: the agent works on the page, then stops when human judgment is required.",
+    "keyCharacteristics": [
+      "Solid white Stride page and translucent fixed review rail.",
+      "Blue agent action, orange human turn, green verification.",
+      "Issues and Agent log share one rail.",
+      "Approval rises from the page as a bottom sheet.",
+      "Monospace is reserved for literal WebMCP evidence."
+    ],
+    "rules": [
+      {
+        "name": "State Color",
+        "body": "Blue acts, orange waits for the person, green proves.",
+        "section": "colors"
+      },
+      {
+        "name": "Evidence",
+        "body": "Machine-readable facts use mono; decisions use system sans.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do match Sightline Workbench v5.dc.html.",
+      "Do keep page and review rail visible together.",
+      "Do stop every mutation at Your call.",
+      "Do keep native WebMCP results at 14 issues / score 72."
+    ],
+    "donts": [
+      "Don't restore the pink unversioned variant.",
+      "Don't restore the custom welcome interface.",
+      "Don't add a third permanent panel or fake chat.",
+      "Don't use green before verification."
+    ]
+  }
+}
