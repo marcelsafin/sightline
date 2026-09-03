@@ -83,5 +83,5 @@ and expert accessibility testing.
 ## Submission links
 
 - Live app: https://sightline-5vu.pages.dev
-- Source: add public GitHub repository URL
+- Source: https://github.com/marcelsafin/sightline (MIT; set to public before submitting)
 - Demo video: add public YouTube URL

@@ -159,51 +159,48 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
 - [x] T011 quickstart §1–§2 gates pass (17 negative = 0, 7 positive ≥ 1).
 - [x] T012 This section.
 - [x] T013 Publish pre-flight: MIT at root, 8/8 README link targets tracked, `.gitignore` covers node_modules/dist/.wrangler, local absolute paths scrubbed from specs/.
-- [ ] T014 **[GATE]** `git add -A && git commit`
-- [ ] T015 **[GATE]** `gh repo create marcelsafin/sightline --public --source=. --push`
-- [ ] T016 Logged-out repo verification.
+- [x] T014 First commit `eca3a2e` (85 files) — approved 2026-09-03 12:4x.
+- [x] T015 https://github.com/marcelsafin/sightline created **PRIVATE** per user
+      ("ha den privat sålänge") and pushed. **Flip to public before Devpost submit.**
+- [x] T016 Remote verified (authenticated, repo private): `registerTool` in
+      src/webmcp.ts, 8/8 README link targets 200, `/license` API → MIT.
+      Logged-out check deferred until public.
 - [x] T017–T019 v5 demo recorded locally via native CDP `WebMCP.*` on prod
       (Chrome 152 headless, real screencast, TTS narration, mov_text captions):
       2:07, 1920×1080, 23→0, 100/100/100, export 23. File in session workspace
       `files/sightline-video-v5/sightline-demo-v5.mp4`. Not uploaded.
-- [ ] T020 **[GATE]** YouTube upload (public).
-- [ ] T021–T023 DEVPOST URLs + final read.
-- [ ] T024 **[GATE]** Devpost submit.
+- [ ] T020 **[USER]** YouTube upload — cannot be done from this session (no
+      Google login). Everything to paste is in `submission/VIDEO_UPLOAD.md`.
+- [x] T021 DEVPOST Source URL filled (with "set to public before submitting").
+- [ ] T022 DEVPOST Demo video URL — after T020.
+- [ ] T023 Final DEVPOST read — after T022.
+- [ ] T024 **[USER]** Flip repo public (`gh repo edit marcelsafin/sightline --visibility public --accept-visibility-change-consequences`), then submit on Devpost.
 - [x] T025 `submission/RUNBOOK.md` written.
 - [x] T026 Prod headers 4/4 match `public/_headers` (recorded in RUNBOOK).
 - [x] T027 ChatGPT smoke: NOT RUN (no programmatic driver). Manual 2-min procedure in RUNBOOK; route stays unclaimed.
-- [ ] T028 **[GATE]** Redeploy (after T015) + native CDP check of annotation.
-- [ ] T029 Fallback wording if T028 not executed before submission.
+- [x] T028 Redeployed `8772bfdd` from committed tree. Native CDP on prod:
+      23/54, needs_input, gate holds, export_patch appears only after approval
+      with `untrustedContent: true` → 3/3 page-content tools marked. Headers 4/4.
+- [x] T029 Not needed — production now matches the general wording.
 - [x] T030 Final quickstart pass recorded in `specs/001-submission-readiness/checklists/requirements.md`.
 - [x] T031 Handoff written (below). User was unavailable at gate time; nothing
       external was executed.
 
-### Resume here — four gates, one approval each
+### Resume here — what only you can do
 
-1. **T014+T015 repo** (needed for a valid entry):
-   `git add -A && git commit -m "Sightline: WebMCP approval layer for pages (a11y · SEO · performance)" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"`
-   `gh repo create marcelsafin/sightline --public --source=. --push`
-   then T016: `curl -s https://api.github.com/repos/marcelsafin/sightline | jq '.license.spdx_id,.private'` → `"MIT"`, `false`.
-2. **T020 video**: upload `files/sightline-video-v5/sightline-demo-v5.mp4` (session
-   workspace) to YouTube, public. Title: "Sightline — the human-approval layer
-   between an agent and a live page (WebMCP)". Description: live URL + repo URL
-   + "Recorded on the deployed app through Chrome's native WebMCP surface."
-3. **T021–T023 DEVPOST URLs**: replace lines "Source: add public…" and "Demo
-   video: add public…" in `submission/DEVPOST.md`; then T024 submit on Devpost.
-4. **T028 redeploy** (after 1): build is already green; run
-   `PATH=<node22-bin>:$PATH npx wrangler@latest pages deploy dist --project-name sightline --branch main --commit-dirty=true`,
-   then native smoke + update rollback id in `submission/RUNBOOK.md`.
-   If 4 is skipped before submission, apply T029: README "Why WebMCP" and
-   DEVPOST §How WebMCP must name only `navigate_node` and `propose_fix` as
-   carrying `untrustedContentHint` (production is 2/3 until redeploy).
+1. **Upload the video** (public) using `submission/VIDEO_UPLOAD.md`; paste the
+   URL into `submission/DEVPOST.md` ("Demo video:").
+2. **Flip the repo public** right before submitting:
+   `gh repo edit marcelsafin/sightline --visibility public --accept-visibility-change-consequences`
+   then confirm logged-out: About panel shows MIT, README renders.
+3. **Submit on Devpost** with the text in `submission/DEVPOST.md`.
+
+Everything else in spec 001 is done and verified on production `8772bfdd`.
 
 ## External actions still requiring explicit user approval
 
-- T014+T015: git commit, create public GitHub repository, push.
-- T020: upload the demo video to YouTube (public) and paste its URL into
-  `submission/DEVPOST.md`.
-- T024: submit the Devpost form.
-- T028: redeploy to Cloudflare Pages so production carries the `export_patch`
-  annotation (only after T015).
+- T020: YouTube upload (needs your Google login).
+- T024: flip repository to public, then submit the Devpost form.
 
-Do not commit or push unless the user explicitly requests it.
+Commits and pushes to the private repo were approved on 2026-09-03 ("fixa allt
+annat"); do not make the repository public without a separate explicit request.

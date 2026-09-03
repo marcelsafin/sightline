@@ -39,8 +39,11 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`d0479006`** (Option C build, CDP-verified 23→0, 23/23
-  human-gated, per-pack 100/100/100).
+- Known-good id: **`8772bfdd`** (2026-09-03, commit `eca3a2e`; CDP-verified on
+  prod: 23/54, `needs_input`, gate holds, `export_patch` registered only after
+  approval with `untrustedContent: true`; 3/3 page-content tools marked).
+- Previous known-good: `d0479006` (Option C build, 23→0, 23/23 gated,
+  100/100/100).
 - Update this id after every deployment that passes the native smoke.
 
 ## Stuck approval
@@ -65,7 +68,7 @@ Say so if it is used on camera.
 
 | route | evidence | publishable |
 |---|---|---|
-| Chrome 151/152 + `#enable-webmcp-testing` (native CDP `WebMCP.*`) | 23→0, 23/23 gated, 100/100/100 on `d0479006`; 2026-09-03 demo recording on Chrome 152 headless | yes |
+| Chrome 151/152 + `#enable-webmcp-testing` (native CDP `WebMCP.*`) | 23→0, 23/23 gated, 100/100/100 on `d0479006`; annotations 3/3 + gate re-verified on `8772bfdd`; 2026-09-03 demo recording on Chrome 152 headless | yes |
 | Built-in "Watch the agent work" client | same session; header "agent via WebMCP" | yes, labelled as built-in |
 | ChatGPT in-app browser | not tested | **no** — do not claim |
 
@@ -85,5 +88,6 @@ claim the ChatGPT route.
 
 ## Contacts / ownership
 
-Single maintainer. Cloudflare account and GitHub repository are personal;
-no shared credentials exist. Nothing in this app stores data or secrets.
+Single maintainer. Cloudflare account and GitHub repository
+(https://github.com/marcelsafin/sightline — private until the maintainer flips
+it public for submission) are personal; no shared credentials exist. Nothing in this app stores data or secrets.
