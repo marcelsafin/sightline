@@ -16,7 +16,7 @@ except ImportError:
 
 URL = sys.argv[1] if len(sys.argv) > 1 else "https://sightline-5vu.pages.dev"
 CHROME = os.environ.get("CHROME") or next(
-    (p for p in ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/usr/bin/google-chrome", "/usr/bin/chromium", shutil.which("google-chrome") or ""] if p and os.path.exists(p)),
+    (p for p in ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", "/usr/bin/chromium", shutil.which("google-chrome") or "", shutil.which("chrome") or ""] if p and os.path.exists(p)),
     None,
 )
 if not CHROME:
@@ -29,7 +29,7 @@ class CDP:
     def __init__(self):
         self.proc = subprocess.Popen(
             [CHROME, "--headless=new", f"--remote-debugging-port={PORT}", "--remote-allow-origins=*", "--window-size=1600,1000",
-             "--enable-features=WebMCP,WebMCPTesting", "--no-first-run", "--no-default-browser-check", f"--user-data-dir={PROFILE}", URL],
+             "--enable-features=WebMCP,WebMCPTesting", "--no-sandbox", "--disable-dev-shm-usage", "--no-first-run", "--no-default-browser-check", f"--user-data-dir={PROFILE}", URL],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         for _ in range(80):
             try:
