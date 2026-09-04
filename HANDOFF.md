@@ -203,9 +203,9 @@ studio.youtube.com with the title/description from `submission/VIDEO_UPLOAD.md`
 (Public, not made for kids, captions `vo/captions.srt`), then run
 `python3 ~/.copilot/session-state/4a61ba03-ede2-47a7-9dbd-3dba9e384bee/files/submit/devpost_finish.py <youtube-url>`
 — it fills the Devpost video field, submits and verifies.
-A scheduled job checks every 15 min; when it sees the session it uploads the
-narrated launch cut, puts the URL into Devpost, submits, and verifies — no
-further input needed. Deadline 2026-09-04 10:00 CEST (Devpost extended 12 h).
+A background watcher (`files/submit/autofinish.sh`, every 20 s) plus a 15-min
+scheduled job pick the session up, upload the narrated launch cut, put the URL
+into Devpost, submit, verify, push the repo and notify — no further input needed. Deadline 2026-09-04 10:00 CEST (Devpost extended 12 h).
 
 State 2026-09-04 05:05:
 - Repo **PUBLIC**, MIT visible logged-out: https://github.com/marcelsafin/sightline
