@@ -381,7 +381,8 @@ function buildDefinitions(
 
 export function registerWebMcp(engine: SightlineEngine): () => void {
   const modelContext = document.modelContext
-  window.__SIGHTLINE__ = { engine }
+  // Debug handle for local development only; production exposes nothing but WebMCP.
+  if (import.meta.env.DEV) window.__SIGHTLINE__ = { engine }
 
   if (!modelContext) {
     engine.setWebMcpState({

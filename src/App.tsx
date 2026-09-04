@@ -7,6 +7,7 @@ import {
   useState,
   useSyncExternalStore,
   type CSSProperties,
+  type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from 'react'
 import { runAgentStep, type AgentTransport } from './agent'
@@ -538,11 +539,59 @@ function ApprovalDock({
   onReject,
 }: ApprovalDockProps) {
   const patch = state.pendingApproval?.patch
+  const dialogRef = useRef<HTMLElement>(null)
+  const patchId = patch?.id
+
+  // Modal focus management: move focus into the dialog when it opens, trap
+  // Tab inside it, and give focus back to where the person was afterwards.
+  useEffect(() => {
+    if (!patchId) return
+    const previous = document.activeElement as HTMLElement | null
+    const dialog = dialogRef.current
+    const approve = dialog?.querySelector<HTMLButtonElement>('button[data-approve]')
+    approve?.focus()
+    return () => {
+      previous?.focus?.()
+    }
+  }, [patchId])
+
+  const onDialogKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+    if (event.key === 'Tab') {
+      const focusable = [...dialog.querySelectorAll<HTMLElement>('button, [href], [tabindex]:not([tabindex="-1"])')]
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+      return
+    }
+    // The single-letter shortcut only fires while focus is inside the dialog,
+    // never from a text field elsewhere on the page (audit BOARD-7).
+    if (event.key.toLowerCase() === 'a' && !event.metaKey && !event.ctrlKey && !event.altKey) {
+      event.preventDefault()
+      onApprove()
+    }
+  }
+
   if (!patch) return null
 
   return (
     <div className="wb-approval-dock">
-      <section aria-labelledby="approval-title" role="dialog">
+      <section
+        aria-labelledby="approval-title"
+        aria-modal="true"
+        onKeyDown={onDialogKeyDown}
+        ref={dialogRef}
+        role="dialog"
+        tabIndex={-1}
+      >
         <span className="wb-approval-handle" />
         <div className="wb-approval-meta">
           <strong>Your call</strong>
@@ -566,7 +615,7 @@ function ApprovalDock({
             <button onClick={onReject} type="button">
               Skip <small>Esc</small>
             </button>
-            <button onClick={onApprove} type="button">
+            <button data-approve onClick={onApprove} type="button">
               Approve <small>A</small>
             </button>
           </div>
@@ -691,10 +740,6 @@ function App() {
       if (event.key === 'Escape') {
         setGuided(false)
         sightlineEngine.rejectPending()
-      }
-      if (event.key.toLowerCase() === 'a') {
-        event.preventDefault()
-        void handleApprove()
       }
     }
     window.addEventListener('keydown', onKeyDown)

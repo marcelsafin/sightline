@@ -8,6 +8,10 @@
 back — accessibility, SEO, performance — and drafts the fix. Nothing ships
 until a person says yes, inside the page, with the exact change in view.**
 
+[![CI](https://github.com/marcelsafin/sightline/actions/workflows/ci.yml/badge.svg)](https://github.com/marcelsafin/sightline/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0071e3.svg)](LICENSE)
+[![WebMCP](https://img.shields.io/badge/WebMCP-9%20tools%20%C2%B7%203%20packs-1c1c1e.svg)](src/webmcp.ts)
+
 [Live demo](https://sightline-5vu.pages.dev) ·
 [Demo script](submission/DEMO_SCRIPT.md) ·
 [Devpost copy](submission/DEVPOST.md)
@@ -125,25 +129,52 @@ await document.modelContext.getTools()
 Useful project commands:
 
 ```bash
+npm run check      # lint · typecheck (app + tests) · vitest · build · bundle budget
+npm test           # vitest: content validation, WCAG maths, approval state machine
 npm run build
-npm run lint
 npm run preview
 ```
 
+### Judging in two minutes
+
+1. Open <https://sightline-5vu.pages.dev> in Chrome 151+ with
+   `chrome://flags/#enable-webmcp-testing` enabled. Six tools register on load;
+   three more appear as the workflow unlocks.
+2. Ask your agent: *"List this page's rule packs, scan it, take the
+   highest-impact issue, propose a fix — author any text it needs — and apply
+   it. Stop when the page asks for my approval."*
+3. Expect `scan_page` → 23 issues, overall 54. `propose_fix` on the first issue
+   returns `needs_input` (the engine will not invent a role); the agent calls
+   again with `role: "button"`. `apply_fix` stays pending until you click
+   **Approve** in the *Your call* sheet, then re-scans and returns 56.
+4. No agent handy? **Watch the agent work** is a real WebMCP client
+   (`getTools()` / `executeTool()`) and stops at the same sheet.
+
 ## Implementation
 
-- React + TypeScript + Vite
-- axe-core, restricted to six deliberate rule classes
-- one event-driven engine shared by human UI and all WebMCP callbacks
-- selector-scoped rule patches; arbitrary agent code is never executed
+- React + TypeScript + Vite; static deployment on Cloudflare Pages — no
+  backend, account, model API or key
+- one event-driven engine shared by the human UI and every WebMCP callback
+- rule packs implement `AuditPack = { scan, fixers }`: accessibility (axe-core,
+  six deliberate rule classes), SEO and performance (plain DOM checks)
+- agent-authored content validated as plain text; engine-measured facts in
+  `evidence[]`; `authoredBy` on every patch
+- selector-scoped patches; arbitrary agent code is never executed
 - snapshot-derived undo that can remove any approved fix safely
-- static deployment on Cloudflare Pages; no backend, account, or API key
+- Vitest (jsdom) covers content validation, WCAG contrast maths, structural
+  selectors and the approval state machine — including a regression test for
+  concurrent `apply_fix` calls during the post-approval re-scan; GitHub
+  Actions runs lint, typecheck, tests, build, a bundle budget and a
+  no-planted-answers check on every push
 
 Core files:
 
 - [`src/engine.ts`](src/engine.ts) — audit, proposals, consent, undo, exports
 - [`src/webmcp.ts`](src/webmcp.ts) — schemas, annotations, progressive tools
+- [`src/packs/`](src/packs) — `accessibility.ts`, `seo.ts`, `performance.ts`, shared helpers
 - [`src/demo.ts`](src/demo.ts) — deterministic 23-problem fixture (14 accessibility · 5 SEO · 4 performance)
+- [`src/__tests__/`](src/__tests__) — Vitest suites
+- [`.specify/memory/constitution.md`](.specify/memory/constitution.md) — the six principles this build is held to
 
 ## Scope and honesty
 
