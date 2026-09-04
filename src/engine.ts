@@ -1,4 +1,3 @@
-import axeSource from 'axe-core/axe.min.js?raw'
 import { DEMO_HTML, DEMO_NAME } from './demo'
 import { accessibilityPack } from './packs/accessibility'
 import { performancePack } from './packs/performance'
@@ -171,7 +170,15 @@ function previewOperation(
   }
 }
 
-function mountAuditSurface(root: HTMLElement): {
+// axe-core (~560 KB) is only needed inside the audit frame. Load it on first
+// scan instead of shipping it in the initial bundle.
+let axeSourcePromise: Promise<string> | null = null
+function loadAxeSource(): Promise<string> {
+  axeSourcePromise ??= import('axe-core/axe.min.js?raw').then((m) => m.default)
+  return axeSourcePromise
+}
+
+function mountAuditSurface(root: HTMLElement, axeSource: string): {
   auditRoot: HTMLElement
   cleanup: () => void
 } {
@@ -324,7 +331,7 @@ export class SightlineEngine {
     throwIfAborted(context.signal)
     const root = this.requireRoot()
     const wcagLevel = input.wcagLevel ?? 'AA'
-    const auditSurface = mountAuditSurface(root)
+    const auditSurface = mountAuditSurface(root, await loadAxeSource())
 
     this.update({ status: 'scanning', error: null })
 
