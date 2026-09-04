@@ -648,6 +648,9 @@ function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [catalog, setCatalog] = useState<AuditIssue[]>([])
   const [guided, setGuided] = useState(false)
+  // True once the bundled agent has run in this session; distinguishes a paused
+  // bundled demo from an external agent driving the page through WebMCP.
+  const bundledStarted = useRef(false)
   const [agentTransport, setAgentTransport] = useState<AgentTransport | null>(null)
   const [exportFormat, setExportFormat] = useState<ExportFormat>('diff')
   const [copied, setCopied] = useState(false)
@@ -844,6 +847,7 @@ function App() {
         { actor: 'agent' },
       )
     }
+    bundledStarted.current = true
     setGuided(true)
     setRailTab('issues')
     stageNextGuidedIssue()
@@ -865,6 +869,7 @@ function App() {
   }
 
   const reset = () => {
+    bundledStarted.current = false
     setGuided(false)
     setSelectedId(null)
     setCatalog([])
@@ -914,7 +919,15 @@ function App() {
             body: 'Every change was approved by you. Export the patch or report from the top bar.',
             tone: 'is-complete',
           }
-        : trace.length
+        : trace.length &&
+            !bundledStarted.current &&
+            state.activities.some((activity) => activity.actor === 'agent')
+          ? {
+              title: 'Agent is working',
+              body: 'An agent is driving this page through its WebMCP tools. It pauses before changing anything.',
+              tone: 'is-agent',
+            }
+          : trace.length
           ? {
               title: 'Paused',
               body: 'Pick up where you left off, or open an issue below to review it on its own.',
