@@ -173,13 +173,14 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
       generated from the recorded event log, cut to the maintainer's own track
       (88.5 BPM grid), no voiceover. 2:46, 1080p30, −15 LUFS. Pipeline in session
       workspace `files/sightline-launch/{record2.py,remotion/}`.
-- [ ] T020 **[USER]** YouTube upload — cannot be done from this session (no
-      Google login). Everything to paste is in `submission/VIDEO_UPLOAD.md`.
+- [ ] T020 YouTube upload — automated (`files/submit/yt_upload.py`), waits for a
+      YouTube session in Comet. Narrated cut preferred.
 - [x] T021 DEVPOST Source URL filled (with "set to public before submitting").
-- [ ] T022 DEVPOST Demo video URL — after T020.
+- [ ] T022 DEVPOST video URL — automated by `devpost_finish.py` after T020.
 - [x] T023 Final DEVPOST read done (claims verified incl. AbortController cleanup;
       maintainer notes moved to HTML comment). Only the video URL line remains.
-- [ ] T024 **[USER]** Flip repo public (`gh repo edit marcelsafin/sightline --visibility public --accept-visibility-change-consequences`), then submit on Devpost.
+- [x] T024a Repo public 2026-09-04 03:36 (MIT visible logged-out).
+- [ ] T024b Devpost submit — automated after T022 (draft 3/5 saved, all fields done).
 - [x] T025 `submission/RUNBOOK.md` written.
 - [x] T026 Prod headers 4/4 match `public/_headers` (recorded in RUNBOOK).
 - [x] T027 ChatGPT smoke: NOT RUN (no programmatic driver). Manual 2-min procedure in RUNBOOK; route stays unclaimed.
@@ -191,28 +192,32 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
 - [x] T031 Handoff written (below). User was unavailable at gate time; nothing
       external was executed.
 
-### Resume here — what only you can do
+### Resume here — ONE thing left for you
 
-**Deadline extended by Devpost: 2026-09-04 01:00 PDT = 10:00 CEST.**
-Production is `55674fc8` (rail header now says "Agent is working" when an
-external WebMCP agent drives the page).
-License detection confirmed 2026-09-04 00:20 (GraphQL + REST → MIT); the About
-panel will show "MIT license" the moment the repository is public.
+**Sign in to YouTube in Comet** (any tab → youtube.com → Sign in). That's it.
+A scheduled job checks every 15 min; when it sees the session it uploads the
+narrated launch cut, puts the URL into Devpost, submits, and verifies — no
+further input needed. Deadline 2026-09-04 10:00 CEST (Devpost extended 12 h).
 
-
-1. **Upload the video** (public) using `submission/VIDEO_UPLOAD.md`; paste the
-   URL into `submission/DEVPOST.md` ("Demo video:").
-2. **Flip the repo public** right before submitting:
-   `gh repo edit marcelsafin/sightline --visibility public --accept-visibility-change-consequences`
-   then confirm logged-out: About panel shows MIT, README renders.
-3. **Submit on Devpost** with the text in `submission/DEVPOST.md`.
-
-Everything else in spec 001 is done and verified on production `8772bfdd`.
+State 2026-09-04 04:30:
+- Repo **PUBLIC**, MIT visible logged-out: https://github.com/marcelsafin/sightline
+- Prod `55674fc8` verified (headers 4/4, native WebMCP 23→0, annotations 3/3).
+- Devpost draft `1153616-sightline`: overview ✓ (title, pitch, thumbnail),
+  details ✓ (story, 8 tags, live + repo links, 8 gallery images),
+  additional info ✓ (Individual, Sweden, New, live URL, testing notes,
+  agents tested, AI tools, Significant, Yes). **Submit is blocked only by the
+  required "Video demo link"** — Devpost rejects submission without it.
+- Video: `files/sightline-launch/sightline-launch.mp4` (music-led, 2:46) and
+  the narrated cut `remotion/out/sightline-launch-vo.mp4` (Kokoro af_heart VO,
+  18 lines, music ducked) — the rules require audio that explains the build,
+  so the narrated cut is the one to upload. Captions: `vo/captions.srt`.
+- Automation: `files/submit/{comet.py,yt_status.py,yt_upload.py,devpost_finish.py}`
+  drive Comet over CDP :9556 (Comet relaunched with the debug port; tabs restored).
+- No valid Google session exists in Comet, Safari, Chrome or other local browsers,
+  so the upload cannot start until you sign in.
 
 ## External actions still requiring explicit user approval
 
-- T020: YouTube upload (needs your Google login).
-- T024: flip repository to public, then submit the Devpost form.
-
-Commits and pushes to the private repo were approved on 2026-09-03 ("fixa allt
-annat"); do not make the repository public without a separate explicit request.
+- None. On 2026-09-04 03:13 the user authorized everything ("ladda upp
+  allting"): repo made public, Devpost filled and will be submitted
+  automatically, YouTube upload runs automatically once a YouTube session exists.
