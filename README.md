@@ -90,7 +90,7 @@ carries `untrustedContentHint`.
 | `apply_fix` | Stage mutation and **wait for a human click** | Human checkpoint |
 | `re_scan` | Verify score and remaining issues | Read-only |
 | `revert_fix` | Rebuild the page without one approved fix | Reversible |
-| `export_patch` | Export approved changes as diff/report | Read-only |
+| `export_patch` | Export approved changes as diff/report | Read-only; untrusted content |
 
 ## Deterministic judging demo
 
