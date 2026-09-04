@@ -33,6 +33,7 @@ jobs:
           retention-days: 7
 
   webmcp-smoke:
+    timeout-minutes: 10
     # End-to-end through Chrome's native WebMCP DevTools domain: the page is
     # driven as an external agent would drive it (constitution VI).
     runs-on: ubuntu-latest

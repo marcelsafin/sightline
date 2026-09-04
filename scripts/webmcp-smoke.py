@@ -8,7 +8,7 @@ WebMCP DevTools domain — the same path an external agent uses, not an in-page 
 Requires Google Chrome 151+ at the default macOS/Linux path (override with CHROME=...).
 Exit code 0 = every invariant below held; 1 = a check failed.
 """
-import json, os, shutil, subprocess, sys, time, urllib.request
+import json, os, shutil, signal, subprocess, sys, time, urllib.request
 try:
     import websocket  # type: ignore
 except ImportError:
@@ -23,6 +23,16 @@ if not CHROME:
     sys.exit("Chrome not found; set CHROME=/path/to/chrome")
 PORT = 9377
 PROFILE = f"/tmp/sightline-smoke-{PORT}"
+WATCHDOG_SEC = int(os.environ.get("SMOKE_TIMEOUT", "240"))
+
+
+def _watchdog(*_):
+    print(f"\nRESULT: FAIL (watchdog: no result after {WATCHDOG_SEC}s)", flush=True)
+    os._exit(1)
+
+
+signal.signal(signal.SIGALRM, _watchdog)
+signal.alarm(WATCHDOG_SEC)
 
 
 class CDP:
@@ -32,15 +42,17 @@ class CDP:
              "--enable-features=WebMCP,WebMCPTesting", "--no-sandbox", "--disable-dev-shm-usage", "--no-first-run", "--no-default-browser-check", f"--user-data-dir={PROFILE}", URL],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         for _ in range(80):
+            if self.proc.poll() is not None:
+                raise SystemExit(f"Chrome exited early with code {self.proc.returncode}")
             try:
-                tabs = json.load(urllib.request.urlopen(f"http://127.0.0.1:{PORT}/json"))
+                tabs = json.load(urllib.request.urlopen(f"http://127.0.0.1:{PORT}/json", timeout=2))
                 page = next(t for t in tabs if t["type"] == "page")
                 break
             except Exception:
                 time.sleep(0.25)
         else:
             raise SystemExit("Chrome did not expose a page target")
-        self.ws = websocket.create_connection(page["webSocketDebuggerUrl"], origin=f"http://127.0.0.1:{PORT}", suppress_origin=False)
+        self.ws = websocket.create_connection(page["webSocketDebuggerUrl"], origin=f"http://127.0.0.1:{PORT}", suppress_origin=False, timeout=10)
         self.ws.settimeout(1.0)
         self.mid = 0
         self.events = []
@@ -104,9 +116,19 @@ def check(cond, label):
         failures.append(label)
 
 
+print(f"chrome: {CHROME}")
+try:
+    print("version:", subprocess.run([CHROME, "--version"], capture_output=True, text=True, timeout=20).stdout.strip())
+except Exception as ex:  # pragma: no cover
+    print("version: ?", ex)
 c = CDP()
 try:
-    c.send("Page.enable"); c.send("Runtime.enable"); c.send("WebMCP.enable")
+    c.send("Page.enable"); c.send("Runtime.enable")
+    try:
+        c.send("WebMCP.enable")
+    except RuntimeError as ex:
+        print("  ✗ WebMCP DevTools domain unavailable in this Chrome:", ex)
+        print("\nRESULT: FAIL"); sys.exit(1)
     frame = c.send("Page.getFrameTree")["frameTree"]["frame"]["id"]
     c.pump(4.0)
     tools = {}
