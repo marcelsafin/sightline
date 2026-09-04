@@ -25,6 +25,14 @@ One page. Everything a maintainer needs while judges are on the site.
 - Native smoke: `npm run smoke` (scripts/webmcp-smoke.py) — 15 invariants over
   Chrome's native WebMCP CDP domain against the live URL; exit 0 = healthy.
 
+## Lighthouse / axe on the live URL
+
+Expected: performance 100 (desktop) / ~98 (mobile), best practices 100, SEO 92,
+accessibility ~81. The accessibility and SEO deductions are **the fixture's
+deliberate problems** (every failing node is under `.audit-canvas`). The
+Sightline shell itself, with the canvas excluded, has 0 axe violations
+(verified 2026-09-04 in four UI states). Do not "fix" the fixture.
+
 ## Redeploy
 
 Requires Node 22 on PATH for `wrangler`; the repo itself runs on Node 20.

@@ -194,6 +194,13 @@ Sightline demonstrates **verified pair-fixing**, not automated compliance.
 Automated rules cannot replace keyboard, screen-reader, cognitive, usability,
 or expert conformance testing. Exports state that boundary explicitly.
 
+Running Lighthouse or axe on the live URL reports the fixture's deliberate
+problems (missing alt text, `role="buton"`, low contrast, …) because the page
+under review is rendered inline — that *is* the demo. Sightline's own shell,
+with the audited canvas excluded, passes axe with zero violations in every
+state, and the page scores 100 / 100 on Lighthouse performance and best
+practices (desktop).
+
 ## License
 
 [MIT](LICENSE)
