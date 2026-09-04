@@ -37,6 +37,7 @@ type IconName =
   | 'x'
 
 const TOOL_NAMES = [
+  'list_packs',
   'scan_page',
   'highlight_issue',
   'navigate_node',
@@ -47,33 +48,14 @@ const TOOL_NAMES = [
   'export_patch',
 ]
 
-const STRIDE_ISSUE_ORDER = [
-  'image-alt-image-hero',
-  'color-contrast-contrast-lede',
-  'aria-roles-aria-share',
-  'label-label-email',
-  'image-alt-image-facebook',
-  'image-alt-image-instagram',
-  'label-label-distance',
-  'color-contrast-contrast-goal',
-  'heading-order-heading-donation',
-  'heading-order-heading-teams',
-  'tabindex-aria-share',
-  'tabindex-focus-signup',
-  'color-contrast-contrast-newsletter',
-  'color-contrast-contrast-footer',
-]
-
-const STRIDE_ISSUE_RANK = new Map(
-  STRIDE_ISSUE_ORDER.map((id, index) => [id, index]),
-)
-
+/**
+ * The rail lists issues in the engine's own priority order (pack, impact,
+ * rule) — the same order the agent works through — and keeps already-fixed
+ * issues in place so the person sees what was approved. No fixture-specific
+ * ordering lives in the UI (constitution III).
+ */
 function sortIssueCatalog(issues: AuditIssue[]): AuditIssue[] {
-  return [...issues].sort(
-    (left, right) =>
-      (STRIDE_ISSUE_RANK.get(left.id) ?? Number.MAX_SAFE_INTEGER) -
-      (STRIDE_ISSUE_RANK.get(right.id) ?? Number.MAX_SAFE_INTEGER),
-  )
+  return [...issues]
 }
 
 const ISSUE_COPY: Record<
@@ -1001,10 +983,17 @@ function App() {
           <strong>Sightline</strong>
         </div>
         <code>{state.sourceName}</code>
-        <span className="wb-header__tool-count">
+        <span
+          className={`wb-header__tool-count${state.webMcp.available ? '' : ' is-unavailable'}`}
+          title={
+            state.webMcp.available
+              ? 'Tools registered through document.modelContext.registerTool'
+              : 'This browser does not expose document.modelContext. In Chrome 151+, enable chrome://flags/#enable-webmcp-testing and reload, or open the page in an agent browser that supports WebMCP.'
+          }
+        >
           {state.webMcp.available
             ? `${state.webMcp.registeredTools.length} WebMCP tools live`
-            : `${TOOL_NAMES.length} WebMCP tools · preview mode`}
+            : `WebMCP not detected — enable chrome://flags/#enable-webmcp-testing, or press Watch the agent work`}
           {agentTransport ? ` · agent via ${agentTransport === 'webmcp' ? 'WebMCP' : 'direct fallback'}` : ''}
         </span>
         <button

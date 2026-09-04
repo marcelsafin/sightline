@@ -72,7 +72,7 @@ async function scan(ctx: ScanContext): Promise<AuditIssue[]> {
         'The page has no title',
         'Search engines and browser tabs use the document title as the primary label for the page.',
         'No <title> element was found in the document head.',
-        'page-head'),
+        'head'),
     )
   } else {
     const text = (titles[0].textContent ?? '').trim()
@@ -94,7 +94,7 @@ async function scan(ctx: ScanContext): Promise<AuditIssue[]> {
         'The page has no meta description',
         'Search engines use the description as the snippet under the title.',
         'No <meta name="description"> was found.',
-        'page-head'),
+        'head'),
     )
   }
 
@@ -105,7 +105,7 @@ async function scan(ctx: ScanContext): Promise<AuditIssue[]> {
         'The document language is not declared',
         'Search engines and screen readers rely on lang to select the right language model.',
         'The <html> element has no lang attribute.',
-        'page-html'),
+        'html-root'),
     )
   }
 

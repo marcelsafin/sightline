@@ -154,6 +154,14 @@ button:disabled {
   white-space: nowrap;
 }
 
+.wb-header__tool-count.is-unavailable {
+  color: var(--ink-2, #3a3a3c);
+  white-space: normal;
+  text-align: right;
+  max-width: 46ch;
+  line-height: 1.25;
+}
+
 .wb-header__export {
   height: 32px;
   flex: none;
