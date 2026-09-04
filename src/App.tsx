@@ -629,8 +629,8 @@ function ExportDialog({
 
   return (
     <div className="wb-modal-backdrop">
-      <section aria-labelledby="export-title" className="wb-export-dialog" role="dialog">
-        <header>
+      <section aria-labelledby="export-title" aria-modal="true" className="wb-export-dialog" role="dialog">
+        <div className="wb-export-dialog__head">
           <h2 id="export-title">Export</h2>
           <div>
             <button
@@ -651,7 +651,7 @@ function ExportDialog({
           <button onClick={onClose} type="button">
             Close
           </button>
-        </header>
+        </div>
         <pre>{preview.content}</pre>
         <footer>
           <span>

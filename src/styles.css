@@ -8,7 +8,7 @@
   --blue: #0071e3;
   --blue-dark: #0058b0;
   --green: #34c759;
-  --green-dark: #248a3d;
+  --green-dark: #1f7a35; /* 4.8:1 on the F2F2F7 field, 5.4:1 on white */
   --orange: #ff9500;
   --orange-dark: #b25000;
   --red: #ff3b30;
@@ -1016,7 +1016,7 @@ button:disabled {
   box-shadow: 0 24px 64px rgb(0 0 0 / 32%);
 }
 
-.wb-export-dialog > header {
+.wb-export-dialog > .wb-export-dialog__head {
   display: flex;
   min-width: 0;
   align-items: center;
@@ -1033,7 +1033,7 @@ button:disabled {
   letter-spacing: -0.026em;
 }
 
-.wb-export-dialog > header > div {
+.wb-export-dialog > .wb-export-dialog__head > div {
   display: flex;
   flex: none;
   gap: 2px;
@@ -1042,7 +1042,7 @@ button:disabled {
   background: var(--control);
 }
 
-.wb-export-dialog > header button {
+.wb-export-dialog > .wb-export-dialog__head button {
   height: 28px;
   padding: 0 14px;
   border: 0;
@@ -1054,14 +1054,14 @@ button:disabled {
   font-weight: 500;
 }
 
-.wb-export-dialog > header button[aria-pressed='true'] {
+.wb-export-dialog > .wb-export-dialog__head button[aria-pressed='true'] {
   background: #fff;
   box-shadow:
     0 1px 3px rgb(0 0 0 / 10%),
     0 0 0 0.5px rgb(0 0 0 / 4%);
 }
 
-.wb-export-dialog > header > button {
+.wb-export-dialog > .wb-export-dialog__head > button {
   margin-left: auto;
   color: var(--blue);
 }
