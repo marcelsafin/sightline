@@ -152,8 +152,13 @@ export async function runAgentStep(
       throw new Error(`Agent could not satisfy propose_fix for ${issueId}.`)
     }
     const patch = result
-    // apply_fix is registered dynamically once a proposal exists.
-    await new Promise((r) => setTimeout(r, 60))
+    // apply_fix is registered dynamically once a proposal exists. Poll the
+    // tool list instead of sleeping a fixed interval (audit CTO-3).
+    const deadline = Date.now() + 2_000
+    while (!(await mc.getTools()).some((t) => t.name === 'apply_fix')) {
+      if (Date.now() > deadline) throw new Error('apply_fix did not register after the proposal.')
+      await new Promise((r) => setTimeout(r, 25))
+    }
     onApplyStaged(
       call('apply_fix', { issueId, patchId: patch.id }).catch(() => undefined),
     )

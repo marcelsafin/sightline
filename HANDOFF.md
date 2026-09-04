@@ -42,8 +42,8 @@ State-dependent tools are registered dynamically as the workflow unlocks them
 ## Safety and scope
 
 - Bundled Stride for Life page is the deterministic judging demo.
-- No import entry point ships; the audited page is the bundled fixture. (A
-  sanitizer module exists in the tree but is not wired — see FIXPLAN B3.)
+- No import entry point ships; the audited page is the bundled fixture. Import
+  is roadmap: CSP first, then a single sanitizer as the only ingress.
 - Fixes are rule-based and selector-scoped. Agent-provided arbitrary code is
   never executed.
 - Six focused rules: image alt text, labels, contrast, heading order,

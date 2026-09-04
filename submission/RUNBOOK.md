@@ -39,9 +39,11 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`55674fc8`** (2026-09-04, rail header shows "Agent is
-  working" for external agents; CDP-verified on prod: 23→0, 23/23 gated,
-  100/100/100, export 23).
+- Known-good id: **`c5e2d665`** (2026-09-04 04:15; race fix CTO-2, contrast
+  both directions, modal focus trap, dev-only debug handle, OG meta;
+  CDP-verified on prod: concurrent apply_fix no longer orphaned, A-key scoped
+  to the dialog, `__SIGHTLINE__` undefined).
+- Previous: `55674fc8` (rail header "Agent is working" for external agents).
 - Previous: `8772bfdd` (2026-09-03; annotations 3/3, gate holds).
 - Previous known-good: `d0479006` (Option C build, 23→0, 23/23 gated,
   100/100/100).
@@ -50,8 +52,9 @@ the known-good deployment → **Rollback to this deployment**.
 ## Stuck approval
 
 Symptom: the "Your call" sheet stays open and Approve/Skip do nothing, or an
-agent tool call never resolves. (Known race when two agent calls overlap the
-re-scan window; see audit finding CTO-2 / FIXPLAN B1.)
+agent tool call never resolves. (The concurrent-call race behind this, audit
+CTO-2, was fixed and regression-tested on 2026-09-04; keep the steps as a
+general recovery.)
 
 1. Click **Skip**. If the sheet closes, continue.
 2. If the page state looks wrong, use **Undo** on the last history entry.

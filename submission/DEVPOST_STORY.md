@@ -98,7 +98,8 @@ No backend, authentication, model API, or secret is required.
 - The whole demo — 23 → 0 across three packs — was verified with an **external agent through Chrome's native WebMCP surface** (CDP `WebMCP.*`), not only through in-page shims. The launch video is that exact run.
 - The bundled "Watch the agent work" button is itself a WebMCP client (`getTools()` / `executeTool()`) — no privileged side channel.
 - A new rule pack is a single file implementing `{ scan, fixers }`; the gate, undo and export come for free.
-- A written constitution (Spec Kit) with six principles; the first one is *Approval Before Mutation (NON-NEGOTIABLE)*.
+- A written constitution (Spec Kit) with six principles; the first one is *Approval Before Mutation (NON-NEGOTIABLE)*. A source-level test enforces that the DOM-mutating function has exactly two call sites: approval and replay of approved history.
+- Vitest coverage of the content validator, the WCAG contrast maths and the approval state machine — including a regression test for two agents overlapping the post-approval re-scan (a real race we found in review) — plus CI with a bundle budget and a no-planted-answers check.
 
 ## What we learned
 
@@ -107,7 +108,7 @@ WebMCP's real power is not "agents can click for you" — it is that a page can 
 ## What's next for Sightline
 
 - Import any page (sanitizer exists; CSP and an import UI are next).
-- Gate `revert_fix` behind the same approval, harden the approval state machine against concurrent agent calls, add Vitest + Playwright coverage and CI.
+- Gate `revert_fix` behind the same approval; add Playwright coverage of the native tool flow on top of the unit suite.
 - More packs on the same engine: security headers, structured data, i18n hygiene.
 
 ## Scope statement
