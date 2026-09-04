@@ -39,9 +39,10 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`8772bfdd`** (2026-09-03, commit `eca3a2e`; CDP-verified on
-  prod: 23/54, `needs_input`, gate holds, `export_patch` registered only after
-  approval with `untrustedContent: true`; 3/3 page-content tools marked).
+- Known-good id: **`55674fc8`** (2026-09-04, rail header shows "Agent is
+  working" for external agents; CDP-verified on prod: 23→0, 23/23 gated,
+  100/100/100, export 23).
+- Previous: `8772bfdd` (2026-09-03; annotations 3/3, gate holds).
 - Previous known-good: `d0479006` (Option C build, 23→0, 23/23 gated,
   100/100/100).
 - Update this id after every deployment that passes the native smoke.
