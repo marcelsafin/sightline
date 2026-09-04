@@ -130,10 +130,17 @@ Useful project commands:
 
 ```bash
 npm run check      # lint · typecheck (app + tests) · vitest · build · bundle budget
-npm test           # vitest: content validation, WCAG maths, approval state machine
+npm test           # vitest: content validation, WCAG maths, approval state machine, constitution
+npm run smoke      # drives the live site through Chrome's native WebMCP CDP domain (needs Chrome 151+, pip install websocket-client)
 npm run build
 npm run preview
 ```
+
+`npm run smoke` is how every deploy is verified: it registers as an external
+agent, checks the annotations, forces a `needs_input` round, stages
+`apply_fix`, proves the DOM is untouched and the call is still pending while
+the sheet is open, approves, and checks that `export_patch` appears with
+`untrustedContentHint` — 15 invariants, exit code 0 or 1.
 
 ### Judging in two minutes
 

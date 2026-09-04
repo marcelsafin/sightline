@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b && tsc -p tsconfig.test.json",
-    "check": "npm run lint && npm run typecheck && npm test && npm run build && node scripts/bundle-budget.mjs"
+    "check": "npm run lint && npm run typecheck && npm test && npm run build && node scripts/bundle-budget.mjs",
+    "smoke": "python3 scripts/webmcp-smoke.py"
   },
   "dependencies": {
     "axe-core": "^4.10.3",

@@ -20,8 +20,8 @@ One page. Everything a maintainer needs while judges are on the site.
   Result 2026-09-03: **4/4 match**. No CSP is deployed; none is required until
   an import entry point ships (constitution, Scope & Truth Constraints).
 
-- Native smoke: Chrome 151 with `chrome://flags/#enable-webmcp-testing` →
-  agent lists tools → `scan_page` returns 23 issues, overall 54.
+- Native smoke: `npm run smoke` (scripts/webmcp-smoke.py) — 15 invariants over
+  Chrome's native WebMCP CDP domain against the live URL; exit 0 = healthy.
 
 ## Redeploy
 
@@ -39,7 +39,7 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
+- Known-good id: **`1f04cc60`** (lazy axe, entry 258 KB; smoke 15/15) — before that **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
   both directions, modal focus trap, dev-only debug handle, OG meta, clear
   no-WebMCP header, engine-order rail, host UI axe 0 in all states;
   CDP-verified on prod).
