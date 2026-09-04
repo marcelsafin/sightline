@@ -194,15 +194,24 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
 
 ### Resume here — ONE thing left for you
 
-**Sign in to YouTube in Comet** (any tab → youtube.com → Sign in). That's it.
+**Sign in to YouTube in Comet** — a Google sign-in tab for YouTube is already open
+and focused in Comet; just complete it. That's it.
+
+If the automatic upload should fail (the scheduled job reports where it stopped):
+upload `files/sightline-launch/sightline-launch-vo.mp4` manually at
+studio.youtube.com with the title/description from `submission/VIDEO_UPLOAD.md`
+(Public, not made for kids, captions `vo/captions.srt`), then run
+`python3 ~/.copilot/session-state/4a61ba03-ede2-47a7-9dbd-3dba9e384bee/files/submit/devpost_finish.py <youtube-url>`
+— it fills the Devpost video field, submits and verifies.
 A scheduled job checks every 15 min; when it sees the session it uploads the
 narrated launch cut, puts the URL into Devpost, submits, and verifies — no
 further input needed. Deadline 2026-09-04 10:00 CEST (Devpost extended 12 h).
 
-State 2026-09-04 04:30:
+State 2026-09-04 04:40:
 - Repo **PUBLIC**, MIT visible logged-out: https://github.com/marcelsafin/sightline
-- Prod `d0f8732e` verified (headers 4/4, native WebMCP 23→0, annotations 3/3,
-  race fix, host-UI axe 0). Tests 15/15, CI green, bundle 826/233 KB.
+- Prod `1f04cc60` verified (`npm run smoke` 15/15 native WebMCP invariants,
+  headers 4/4, host-UI axe 0 in four states). Tests 22/22, CI green, entry
+  bundle 258 KB (axe lazy-loaded).
 - Devpost draft `1153616-sightline`: overview ✓ (title, pitch, thumbnail),
   details ✓ (story, 8 tags, live + repo links, 8 gallery images),
   additional info ✓ (Individual, Sweden, New, live URL, testing notes,
