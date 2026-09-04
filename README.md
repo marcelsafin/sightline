@@ -169,10 +169,11 @@ the sheet is open, approves, and checks that `export_patch` appears with
   `evidence[]`; `authoredBy` on every patch
 - selector-scoped patches; arbitrary agent code is never executed
 - snapshot-derived undo that can remove any approved fix safely
-- Vitest (jsdom), 22 tests: content validation, WCAG contrast maths,
-  structural selectors, the SEO and performance packs, the approval state
-  machine — including a regression test for concurrent `apply_fix` calls during
-  the post-approval re-scan — and constitution checks (no fixture key is
+- Vitest (jsdom), 27 tests: content validation, WCAG contrast maths,
+  structural selectors, the SEO and performance packs, the full engine workflow
+  (`needs_input` → authored patch → approve → export → revert, AbortSignal),
+  the approval state machine — including a regression test for concurrent
+  `apply_fix` calls during the post-approval re-scan — and constitution checks (no fixture key is
   referenced outside the fixture; the bundled agent never touches the DOM).
   GitHub Actions runs lint, typecheck, tests, build, a bundle budget and a
   no-planted-answers check on every push, then serves the production build

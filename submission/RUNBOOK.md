@@ -49,7 +49,7 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`806b7f8c`** (2026-09-04 05:05; anti-clickjacking headers, robots/sitemap; smoke 15/15) — before that **`1f04cc60`** (lazy axe) and **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
+- Known-good id: **`ccbd5839`** (2026-09-04 05:25; review report with per-pack scores + evidence; smoke 15/15) — before that **`806b7f8c`** (anti-clickjacking headers, robots/sitemap) — before that **`1f04cc60`** (lazy axe) and **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
   both directions, modal focus trap, dev-only debug handle, OG meta, clear
   no-WebMCP header, engine-order rail, host UI axe 0 in all states;
   CDP-verified on prod).
