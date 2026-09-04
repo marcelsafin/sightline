@@ -352,7 +352,7 @@ function buildDefinitions(
         name: 'export_patch',
         title: 'Export verified work',
         description:
-          'Export only human-approved changes as a compact unified-style diff or a focused accessibility report.',
+          'Export only human-approved changes as a compact unified-style diff or a review report with per-pack scores, evidence and a scope statement.',
         inputSchema: {
           type: 'object',
           properties: {

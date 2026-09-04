@@ -786,29 +786,39 @@ export class SightlineEngine {
 
   private createReport(): string {
     const score = this.state.score ?? '—'
+    const open = this.state.issues
+    const perPack = this.packs.map((pack) => {
+      const remaining = open.filter((issue) => issue.packId === pack.id).length
+      return `- ${pack.label}: ${Math.max(0, 100 - 2 * remaining)}/100 · ${remaining} open`
+    })
     return [
-      '# Sightline focused accessibility report',
+      '# Sightline review report',
       '',
       `Source: ${this.state.sourceName}`,
-      `Score: ${score}/100`,
-      `Focused barriers remaining: ${this.state.issues.length}`,
-      `Approved fixes: ${this.state.appliedFixes.length}`,
+      `Overall score: ${score}/100 (100 − 2 × open issues)`,
+      ...perPack,
+      `Open issues: ${open.length}`,
+      `Approved changes: ${this.state.appliedFixes.length}`,
       '',
       '## Approved changes',
       '',
       ...(this.state.appliedFixes.length
         ? this.state.appliedFixes.flatMap((fix, index) => [
             `${index + 1}. **${fix.patch.summary}**`,
-            `   - Rule: \`${fix.patch.ruleId}\``,
+            `   - Rule: \`${fix.patch.ruleId}\` · authored by ${fix.patch.authoredBy}`,
             `   - Target: \`${fix.patch.selector}\``,
             `   - Why: ${fix.patch.rationale}`,
+            `   - Evidence: ${fix.patch.evidence.join(' · ')}`,
           ])
-        : ['No fixes approved.']),
+        : ['No changes approved yet.']),
       '',
       '## Scope',
       '',
       `Rule packs: ${this.packs.map((pack) => `${pack.label} (${pack.rules.join(', ')})`).join('; ')}.`,
-      'This report supports human review; it is not a certification of WCAG compliance.',
+      'Every change above was approved by a person on the live page. This report',
+      'supports human review; it is not a certification of WCAG conformance, and',
+      'automated rules do not replace keyboard, screen-reader, cognitive, usability',
+      'or expert testing.',
       '',
     ].join('\n')
   }
