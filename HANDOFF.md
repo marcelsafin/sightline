@@ -167,6 +167,12 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
       (Chrome 152 headless, real screencast, TTS narration, mov_text captions):
       2:07, 1920×1080, 23→0, 100/100/100, export 23. File in session workspace
       `files/sightline-video-v5/sightline-demo-v5.mp4`. Not uploaded.
+- [x] T017–T019 (superseded) **Launch cut** built 2026-09-04: Remotion composition
+      over a real 2560-px WebMCP screencast of prod (external agent via CDP
+      `WebMCP.*`, agent-authored content), tool-call callouts + score HUD
+      generated from the recorded event log, cut to the maintainer's own track
+      (88.5 BPM grid), no voiceover. 2:46, 1080p30, −15 LUFS. Pipeline in session
+      workspace `files/sightline-launch/{record2.py,remotion/}`.
 - [ ] T020 **[USER]** YouTube upload — cannot be done from this session (no
       Google login). Everything to paste is in `submission/VIDEO_UPLOAD.md`.
 - [x] T021 DEVPOST Source URL filled (with "set to public before submitting").
@@ -188,6 +194,8 @@ Constitution: `.specify/memory/constitution.md` v1.0.0.
 ### Resume here — what only you can do
 
 **Deadline extended by Devpost: 2026-09-04 01:00 PDT = 10:00 CEST.**
+Production is `55674fc8` (rail header now says "Agent is working" when an
+external WebMCP agent drives the page).
 License detection confirmed 2026-09-04 00:20 (GraphQL + REST → MIT); the About
 panel will show "MIT license" the moment the repository is public.
 
