@@ -39,10 +39,10 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`c5e2d665`** (2026-09-04 04:15; race fix CTO-2, contrast
-  both directions, modal focus trap, dev-only debug handle, OG meta;
-  CDP-verified on prod: concurrent apply_fix no longer orphaned, A-key scoped
-  to the dialog, `__SIGHTLINE__` undefined).
+- Known-good id: **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
+  both directions, modal focus trap, dev-only debug handle, OG meta, clear
+  no-WebMCP header, engine-order rail, host UI axe 0 in all states;
+  CDP-verified on prod).
 - Previous: `55674fc8` (rail header "Agent is working" for external agents).
 - Previous: `8772bfdd` (2026-09-03; annotations 3/3, gate holds).
 - Previous known-good: `d0479006` (Option C build, 23→0, 23/23 gated,

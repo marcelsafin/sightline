@@ -201,7 +201,8 @@ further input needed. Deadline 2026-09-04 10:00 CEST (Devpost extended 12 h).
 
 State 2026-09-04 04:30:
 - Repo **PUBLIC**, MIT visible logged-out: https://github.com/marcelsafin/sightline
-- Prod `55674fc8` verified (headers 4/4, native WebMCP 23→0, annotations 3/3).
+- Prod `d0f8732e` verified (headers 4/4, native WebMCP 23→0, annotations 3/3,
+  race fix, host-UI axe 0). Tests 15/15, CI green, bundle 826/233 KB.
 - Devpost draft `1153616-sightline`: overview ✓ (title, pitch, thumbnail),
   details ✓ (story, 8 tags, live + repo links, 8 gallery images),
   additional info ✓ (Individual, Sweden, New, live URL, testing notes,
