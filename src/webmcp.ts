@@ -192,7 +192,7 @@ function buildDefinitions(
         name: 'propose_fix',
         title: 'Propose safe fix',
         description:
-          'Create a selector-scoped patch for one current issue. Does not mutate the page. For image-alt, label and aria-roles the AGENT must author the content (altText / labelText / role) using the page context; call without it first to receive a needs_input response with guidance, html and nearbyText. Contrast, heading level and tabindex are measured by the engine from the live DOM.',
+          'Create a selector-scoped patch for one current issue. Does not mutate the page. Where a fix needs human-facing words the AGENT must author them from the page context — image-alt → altText, label → labelText, aria-roles → role, document-title → title, meta-description → description, link-text → linkText. Call without that field first to receive a needs_input response with requiredField, guidance, html and nearbyText, then call again with it. Contrast, heading level, tabindex, lang, image dimensions and rel=noopener are measured by the engine from the live DOM. The returned patch carries evidence[] and authoredBy; pass its id to apply_fix.',
         inputSchema: {
           type: 'object',
           properties: {
