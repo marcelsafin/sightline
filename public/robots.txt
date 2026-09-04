@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://sightline-5vu.pages.dev/sitemap.xml
