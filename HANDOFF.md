@@ -212,6 +212,7 @@ State 2026-09-04 04:40:
 - Prod `1f04cc60` verified (`npm run smoke` 15/15 native WebMCP invariants,
   headers 4/4, host-UI axe 0 in four states). Tests 22/22, CI green, entry
   bundle 258 KB (axe lazy-loaded).
+- Devpost project page (public once submitted): https://devpost.com/software/sightline-mndf14
 - Devpost draft `1153616-sightline`: overview ✓ (title, pitch, thumbnail),
   details ✓ (story, 8 tags, live + repo links, 8 gallery images),
   additional info ✓ (Individual, Sweden, New, live URL, testing notes,

@@ -93,5 +93,6 @@ Maintainer notes — do not paste into Devpost:
   Confirm logged-out that the About panel shows "MIT license" before submitting.
 - Video: upload per submission/VIDEO_UPLOAD.md, then replace the line above.
 - Devpost "Built with": React, TypeScript, Vite, axe-core, WebMCP, Cloudflare Pages.
+- Project page: https://devpost.com/software/sightline-mndf14 (draft until the video URL is set and the form is submitted).
 -->
 
