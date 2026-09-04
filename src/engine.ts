@@ -625,6 +625,11 @@ export class SightlineEngine {
       return
     }
 
+    // Release the approval slot *before* the asynchronous re-scan. A concurrent
+    // agent may legitimately propose and stage the next patch while we verify
+    // this one; clearing after the await would wipe that newer resolver and
+    // orphan its apply_fix promise (audit finding CTO-2).
+    this.clearApprovalResolver()
     try {
       this.applyOperation(pending.patch)
       const fix: AppliedFix = {
@@ -643,7 +648,6 @@ export class SightlineEngine {
         { wcagLevel: 'AA', scope: 'changed' },
         { actor: 'human', silent: true },
       )
-      this.clearApprovalResolver()
       resolver.resolve({
         status: 'applied',
         fixId: fix.id,
@@ -652,7 +656,9 @@ export class SightlineEngine {
         remainingIssues: scan.issueCount,
       })
     } catch (error) {
-      this.clearApprovalResolver()
+      if (this.state.pendingApproval?.patch.id === pending.patch.id) {
+        this.update({ pendingApproval: null })
+      }
       resolver.reject(error)
     }
   }

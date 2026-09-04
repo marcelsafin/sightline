@@ -16,6 +16,7 @@ import {
   expectedHeadingLevel,
   parseRgb,
   passingForeground,
+  relativeLuminance,
   requiredContrast,
   toHex,
 } from './shared'
@@ -189,12 +190,18 @@ const colorContrast: Fixer = (issue, element): PatchOutcome => {
   const before = contrastRatio(fg, bg)
   const fixed = passingForeground(fg, bg, target)
   const after = contrastRatio(fixed, bg)
+  if (after < target) {
+    throw new Error(
+      `Cannot reach ${target}:1 by changing the text colour alone (best ${after.toFixed(2)}:1 against ${toHex(bg)}); the background needs a design decision.`,
+    )
+  }
+  const direction = relativeLuminance(fixed) < relativeLuminance(fg) ? 'Darken' : 'Lighten'
   return {
     kind: 'patch',
     definition: {
       ruleId: issue.ruleId,
-      summary: `Darken text from ${before.toFixed(2)}:1 to ${after.toFixed(2)}:1`,
-      rationale: `Measured ${before.toFixed(2)}:1 against the effective background; WCAG requires ${target}:1 for this text size. The replacement keeps the same hue, darkened just enough to pass.`,
+      summary: `${direction} text from ${before.toFixed(2)}:1 to ${after.toFixed(2)}:1`,
+      rationale: `Measured ${before.toFixed(2)}:1 against the effective background; WCAG requires ${target}:1 for this text size. The replacement keeps the same hue, ${direction === 'Darken' ? 'darkened' : 'lightened'} just enough to pass.`,
       evidence: [
         `measured contrast: ${before.toFixed(2)}:1`,
         `required: ${target}:1`,

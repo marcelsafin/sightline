@@ -84,28 +84,41 @@ export function toHex([r, g, b]: [number, number, number, number]): string {
 }
 
 /**
- * Darken (or lighten) the current foreground along its own hue until the
- * text passes the given ratio. Preserves the palette instead of hardcoding a
- * replacement colour.
+ * Move the current foreground along its own hue — darker or lighter — until
+ * the text passes the given ratio. Both directions are tried and the passing
+ * candidate closest to the original colour wins, so the palette survives.
+ * On a mid-luminance background only one direction can pass (audit BOARD-1);
+ * if neither does, the higher-contrast extreme is returned and the caller
+ * must check `contrastRatio(result, bg) >= target` before claiming a fix.
  */
 export function passingForeground(
   fg: [number, number, number, number],
   bg: [number, number, number, number],
   target: number,
 ): [number, number, number, number] {
-  const bgIsLight = relativeLuminance(bg) > 0.5
-  let candidate: [number, number, number, number] = [...fg]
-  for (let step = 0; step < 100; step += 1) {
-    if (contrastRatio(candidate, bg) >= target) return candidate
-    const factor = bgIsLight ? 0.94 : 1.06
-    candidate = [
-      Math.min(255, candidate[0] * factor),
-      Math.min(255, candidate[1] * factor),
-      Math.min(255, candidate[2] * factor),
-      1,
-    ]
+  const walk = (factor: number): [number, number, number, number] | null => {
+    let candidate: [number, number, number, number] = [fg[0], fg[1], fg[2], 1]
+    for (let step = 0; step < 120; step += 1) {
+      if (contrastRatio(candidate, bg) >= target) return candidate
+      candidate = [
+        Math.min(255, Math.max(0, candidate[0] * factor + (factor > 1 ? 1 : 0))),
+        Math.min(255, Math.max(0, candidate[1] * factor + (factor > 1 ? 1 : 0))),
+        Math.min(255, Math.max(0, candidate[2] * factor + (factor > 1 ? 1 : 0))),
+        1,
+      ]
+    }
+    return null
   }
-  return bgIsLight ? [0, 0, 0, 1] : [255, 255, 255, 1]
+  const darker = walk(0.94)
+  const lighter = walk(1.06)
+  const distance = (c: [number, number, number, number]) =>
+    Math.hypot(c[0] - fg[0], c[1] - fg[1], c[2] - fg[2])
+  if (darker && lighter) return distance(darker) <= distance(lighter) ? darker : lighter
+  if (darker) return darker
+  if (lighter) return lighter
+  const black: [number, number, number, number] = [0, 0, 0, 1]
+  const white: [number, number, number, number] = [255, 255, 255, 1]
+  return contrastRatio(black, bg) >= contrastRatio(white, bg) ? black : white
 }
 
 export function requiredContrast(element: HTMLElement): number {
