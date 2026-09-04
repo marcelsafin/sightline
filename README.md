@@ -175,8 +175,9 @@ the sheet is open, approves, and checks that `export_patch` appears with
   the post-approval re-scan — and constitution checks (no fixture key is
   referenced outside the fixture; the bundled agent never touches the DOM).
   GitHub Actions runs lint, typecheck, tests, build, a bundle budget and a
-  no-planted-answers check on every push; `npm run smoke` verifies the live
-  site through Chrome's native WebMCP domain
+  no-planted-answers check on every push, then serves the production build
+  and runs the same 15-invariant native WebMCP smoke against it in headless
+  Chrome — `npm run smoke` runs it locally or against the live site
 
 Core files:
 

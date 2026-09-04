@@ -98,7 +98,7 @@ No backend, authentication, model API, or secret is required.
 - The whole demo — 23 → 0 across three packs — was verified with an **external agent through Chrome's native WebMCP surface** (CDP `WebMCP.*`), not only through in-page shims. The launch video is that exact run.
 - The bundled "Watch the agent work" button is itself a WebMCP client (`getTools()` / `executeTool()`) — no privileged side channel.
 - A new rule pack is one file implementing `{ scan, fixers }` (plus its id in the `PackId` union and the engine's pack list); the tool surface, the gate, undo and export come for free.
-- `npm run smoke` reproduces our verification: 15 invariants driven through Chrome's native WebMCP DevTools domain against the live URL.
+- `npm run smoke` reproduces our verification: 15 invariants driven through Chrome's native WebMCP DevTools domain — CI runs it against every build in headless Chrome, and it runs against the live URL too.
 - A written constitution (Spec Kit) with six principles; the first one is *Approval Before Mutation (NON-NEGOTIABLE)*. A source-level test enforces that the DOM-mutating function has exactly two call sites: approval and replay of approved history.
 - Vitest coverage of the content validator, the WCAG contrast maths and the approval state machine — including a regression test for two agents overlapping the post-approval re-scan (a real race we found in review) — plus CI with a bundle budget and a no-planted-answers check.
 
