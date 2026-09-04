@@ -56,7 +56,8 @@ run on the same engine, through the same gate.
 
 Packs are a first-class primitive (`src/packs/types.ts`). A pack is
 `{ scan(root), fixers }`; the engine, the WebMCP tool surface, undo, and export
-are shared. Adding a fourth pack is one file.
+are shared. Adding a fourth pack is one file implementing `{ scan, fixers }`,
+plus its id in the `PackId` union and the engine's pack list.
 
 ## Why WebMCP
 
