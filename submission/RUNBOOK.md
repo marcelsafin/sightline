@@ -88,8 +88,10 @@ Say so if it is used on camera.
 
 ## ChatGPT in-app browser smoke (manual, 2 min)
 
-Status 2026-09-03: **not run** (no programmatic driver; not attempted against
-the maintainer's live ChatGPT session). Until this passes, no public text may
+Status 2026-09-04 05:20: **not run.** The ChatGPT macOS app (26.901) exposes no
+accessibility tree to script against and no CLI/URL entry point for its
+in-app browser, so it cannot be driven headlessly; it needs a person at the
+keyboard with the maintainer's account. Until this passes, no public text may
 claim the ChatGPT route.
 
 1. ChatGPT desktop app → open the in-app browser → load
