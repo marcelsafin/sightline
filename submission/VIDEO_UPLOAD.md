@@ -1,7 +1,7 @@
 # Demo video — upload sheet
 
 File (session workspace, not in repo): `files/sightline-launch/sightline-launch-vo.mp4`
-2:46 · 1920×1080 · H.264 (CRF 16) / AAC 256k · −15.8 LUFS · synthesized narration (18 lines) over the maintainer's own track. Shot list: `submission/DEMO_SCRIPT.md`.
+2:46 · 1920×1080 · H.264 (CRF 16) / AAC 256k · −15.9 LUFS, true peak −0.9 dBFS · synthesized narration (18 lines) over the maintainer's own track. Shot list: `submission/DEMO_SCRIPT.md`.
 
 How it was made (truthfully reproducible — `files/sightline-launch/`):
 - `record2.py` drives https://sightline-5vu.pages.dev as an external WebMCP agent over

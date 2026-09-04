@@ -14,7 +14,7 @@ real time.
 - Narration: synthesized voice (Kokoro-82M, voice `af_heart`), 18 lines, kept
   under 1.1× tempo, normalised to −16.5 LUFS with the music ducked to 36 %
   underneath. Devpost explicitly allows AI narration; the words are ours.
-- Loudness: −15.8 LUFS integrated. Captions: `captions.srt` (same 18 lines).
+- Loudness: −15.9 LUFS integrated, true peak −0.9 dBFS. Captions: `captions.srt` (same 18 lines).
 - Route: Chrome 152 headless, `--enable-features=WebMCP,WebMCPTesting`,
   agent-authored content (`role: "button"`, `altText: "Stride for Life event
   illustration"`, `title: "Stride for Life — every step counts"`, …).
