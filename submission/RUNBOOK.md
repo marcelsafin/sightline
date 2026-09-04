@@ -16,9 +16,11 @@ One page. Everything a maintainer needs while judges are on the site.
   | `x-content-type-options` | `nosniff` |
   | `referrer-policy` | `strict-origin-when-cross-origin` |
   | `cross-origin-resource-policy` | `same-origin` |
+  | `x-frame-options` | `DENY` — the approval UI must not be framed |
+  | `content-security-policy` | `frame-ancestors 'none'` |
 
-  Result 2026-09-03: **4/4 match**. No CSP is deployed; none is required until
-  an import entry point ships (constitution, Scope & Truth Constraints).
+  Result 2026-09-04 05:05: **7/7 match** (incl. `HTTP/2 200`). A full CSP
+  (script/style sources) is deferred until an import entry point ships.
 
 - Native smoke: `npm run smoke` (scripts/webmcp-smoke.py) — 15 invariants over
   Chrome's native WebMCP CDP domain against the live URL; exit 0 = healthy.
@@ -39,7 +41,7 @@ After deploy: repeat the native smoke above, then update the rollback id below.
 Cloudflare dashboard → Workers & Pages → **sightline** → Deployments → select
 the known-good deployment → **Rollback to this deployment**.
 
-- Known-good id: **`1f04cc60`** (lazy axe, entry 258 KB; smoke 15/15) — before that **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
+- Known-good id: **`806b7f8c`** (2026-09-04 05:05; anti-clickjacking headers, robots/sitemap; smoke 15/15) — before that **`1f04cc60`** (lazy axe) and **`d0f8732e`** (2026-09-04 04:40; race fix CTO-2, contrast
   both directions, modal focus trap, dev-only debug handle, OG meta, clear
   no-WebMCP header, engine-order rail, host UI axe 0 in all states;
   CDP-verified on prod).

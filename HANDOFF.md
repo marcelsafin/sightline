@@ -207,11 +207,12 @@ A scheduled job checks every 15 min; when it sees the session it uploads the
 narrated launch cut, puts the URL into Devpost, submits, and verifies — no
 further input needed. Deadline 2026-09-04 10:00 CEST (Devpost extended 12 h).
 
-State 2026-09-04 04:40:
+State 2026-09-04 05:05:
 - Repo **PUBLIC**, MIT visible logged-out: https://github.com/marcelsafin/sightline
-- Prod `1f04cc60` verified (`npm run smoke` 15/15 native WebMCP invariants,
-  headers 4/4, host-UI axe 0 in four states). Tests 22/22, CI green, entry
-  bundle 258 KB (axe lazy-loaded).
+- Prod `806b7f8c` verified (`npm run smoke` 15/15 native WebMCP invariants,
+  security headers 7/7 incl. X-Frame-Options DENY, host-UI axe 0 in four
+  states). Tests 22/22, CI green incl. native WebMCP e2e job, entry bundle
+  258 KB (axe lazy-loaded).
 - Devpost project page (public once submitted): https://devpost.com/software/sightline-mndf14
 - Devpost draft `1153616-sightline`: overview ✓ (title, pitch, thumbnail),
   details ✓ (story, 8 tags, live + repo links, 8 gallery images),
