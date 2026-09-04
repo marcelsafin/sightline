@@ -1,89 +1,57 @@
-# Sightline demo script — 2:40 target (hard cap 2:59)
+# Sightline launch video — shot list (2:46)
 
-Route: **Google Chrome 151+ with `chrome://flags/#enable-webmcp-testing`** on
-https://sightline-5vu.pages.dev, driven by an external agent through the native
-WebMCP tool surface. Do not attribute behaviour to the ChatGPT in-app browser;
-that route is untested.
+This is the video submitted to the WebMCP Challenge: `sightline-launch-vo.mp4`.
+It is a Remotion composition over a **real screencast** of the deployed app
+(https://sightline-5vu.pages.dev) driven by an external agent through Chrome's
+native WebMCP DevTools domain. Tool-call callouts and the score HUD are
+generated from the recorded WebMCP event log; nothing is mocked or drawn.
+Two montages are time-compressed (1.4× and 1.8× / 1.23×); every other frame is
+real time.
 
-Numbers are measurements from the deployed build: 23 problems (14 · 5 · 4),
-overall 54 → 100, per-pack 100 / 100 / 100, 9 agent-authored + 14
-engine-measured fixes. Never say "confidence".
+- Music: the maintainer's own track, 88.5 BPM; every cut sits on the bar grid
+  (first downbeat 0.07 s). The `needs_input` beat lands on the bar-16 hit; the
+  100·100·100 reveal lands on the bar-50 drop.
+- Narration: synthesized voice (Kokoro-82M, voice `af_heart`), 18 lines, kept
+  under 1.1× tempo, normalised to −16.5 LUFS with the music ducked to 36 %
+  underneath. Devpost explicitly allows AI narration; the words are ours.
+- Loudness: −15.8 LUFS integrated. Captions: `captions.srt` (same 18 lines).
+- Route: Chrome 152 headless, `--enable-features=WebMCP,WebMCPTesting`,
+  agent-authored content (`role: "button"`, `altText: "Stride for Life event
+  illustration"`, `title: "Stride for Life — every step counts"`, …).
 
-## 0:00–0:20 — Problem (shot 1)
+| Time | Beat | On screen | Voice |
+|---|---|---|---|
+| 0:00–0:08 | Cold open | Black. Kinetic type: “Every AI that fixes your site” → “makes the same trade.” | “Every AI that fixes your website makes the same trade. Speed, for control. It edits somewhere you can't see, and reports back: done.” |
+| 0:08–0:14 |  | “Speed for control.” (display type) |  |
+| 0:14–0:19 | Reveal | Workbench still zooms out to a floating card; wordmark; tagline “The human-approval layer between an agent and a live page.” | “Sightline refuses that trade.” |
+| 0:19–0:24 | Discovery | Live screencast: `list_packs` → three packs; `scan_page` → 23 issues, overall 54 (callouts from the recorded WebMCP log) | “A human-approval layer, built on WebMCP. The page declares. The agent calls.” |
+| 0:24–0:30 |  | Punch-in on the review rail: “23 problems. Three packs. One gate.” | “Three rule packs. One engine. One gate.” |
+| 0:30–0:35 |  | `highlight_issue` on the share control (`role="buton"`): “The agent points. You both see the same element.” | “The agent scans, points, and proposes, on the real page, in front of you. You both see the same element.” |
+| 0:35–0:43 |  | `propose_fix` without content → popover shows highlight ✓, propose, apply |  |
+| 0:43–0:48 | The gate (music hit) | `needs_input · requiredField: "role"` — “The engine refuses to guess.” | “When a fix needs words, the engine refuses to guess.” |
+| 0:48–0:54 |  | Agent calls again with `role: "button"`; proposal card: authoredBy agent, evidence — “The agent authors it.” | “It returns the context. The agent writes the words.” |
+| 0:54–0:56 |  | `apply_fix` called; live screencast |  |
+| 0:56–1:02 |  | Punch-in on the “Your call” sheet: exact before/after, Skip / Approve — “Nothing changes until you say yes.” Callout: apply_fix · pending — waiting for a person | “Then apply fix stops. Nothing changes until you say yes.” |
+| 1:02–1:07 |  | Approve click on camera → DOM changes, re-scan, overall 56 (score HUD) | “Approve, and the live page changes, re-scans, and reports back.” |
+| 1:07–1:15 | Agents author | Second `needs_input` (alt text); agent writes “Stride for Life event illustration” — “Agents author.” | “Agents author what a person would write.” |
+| 1:15–1:21 |  | Approve → 58 |  |
+| 1:21–1:26 | Engines measure | Contrast proposal: measured 1.68:1 · required 4.5:1 · proposed #727275 → 4.79:1 — “Engines measure.” | “Engines measure: contrast, heading levels, image sizes.” |
+| 1:26–1:43 | Montage 1 | Approve → 60; accessibility fixes 1.4× (label, image-alt, contrast, tabindex, heading-order) with per-fix callouts and HUD to 82; “Accessibility → 100” | “Every forward change goes through the same click. Accessibility, to one hundred.” |
+| 1:43–1:48 | Breakdown | Rail: Accessibility 0 · SEO 5 · Performance 4 — “Not automatic compliance.” | “Not automatic compliance. A record of what a human approved.” |
+| 1:48–1:59 | Built on WebMCP | Code card: the real `registerTool` for `apply_fix` types in; bullets: nine tools, readOnlyHint, untrustedContentHint, AbortSignal, apply_fix resolves after approval, progressive discovery | “Nine tools, registered with document dot model context. Typed inputs. Read-only and untrusted-content hints. Abort signals honoured.” |
+| 1:59–2:05 | Same gate. SEO. | `needs_input · title`; agent writes “Stride for Life — every step counts”; sheet; Approve → 84 | “SEO. Performance. Same engine, same gate. Every pack, the same click.” |
+| 2:05–2:15 | Montage 2 | SEO + performance fixes (meta description, lang, single h1, link text, image dimensions, noopener) 1.8× / 1.23× with callouts; HUD to 100 — “Every pack. Same click.” |  |
+| 2:15–2:20 | Climax (music drop) | “100 · 100 · 100” — All 23 fixed; callout re_scan · 0 issues · overall 100 · accessibility 100 · seo 100 · performance 100 | “Twenty-three approved changes. One hundred, everywhere.” |
+| 2:20–2:26 |  | `export_patch { format: "diff" }` → unified diff of the 23 approved changes — “Export only what you approved.” | “Export only what you approved.” |
+| 2:26–2:31 |  | “Nine tools. Three packs. One gate.” tool chips land on beats |  |
+| 2:31–2:46 | Close | Wordmark. “The agent drafts. You decide.” sightline-5vu.pages.dev · github.com/marcelsafin/sightline · Built for the OpenAI WebMCP Challenge · MIT | “Sightline. The agent drafts. You decide.” |
 
-**Visual:** Workbench loaded after its automatic first scan. Stride for Life
-page left; review rail right reads **"23 things hold this page back"** with
-three pack chips (14 · 5 · 4). Header shows the WebMCP status.
+## Reproduce
 
-**Voiceover:** NARRATION §01, first three sentences.
-
-## 0:20–0:38 — Discovery (shots 2–3)
-
-**Visual:** Agent calls `list_packs` → three packs. Agent calls `scan_page`
-→ log confirms **23 issues**, per-pack 72 / 90 / 92, overall **54**.
-
-**Voiceover:** NARRATION §01, remaining sentences.
-
-## 0:38–1:10 — The agent has to author (shots 4–5)
-
-**Visual:** `highlight_issue` → focus box lands on the share control
-carrying `role="buton"`. `propose_fix` **without** `role` → response shows
-`needs_input` with `guidance`, `html`, `nearbyText`. Agent calls `propose_fix`
-again with `role: "button"`. Proposal card shows before/after DOM,
-**evidence** rows, and `authoredBy: agent`.
-
-**Voiceover:** NARRATION §02.
-
-## 1:10–1:35 — Human checkpoint (shot 6)
-
-**Visual:** Agent calls `apply_fix`. Sheet opens: **Your call**, exact diff,
-Skip / Approve. Hold 2 s on the pending tool call. Click **Approve** (real
-click, on camera). Image updates; rail shows re-scan; overall **56**.
-
-**Voiceover:** NARRATION §03.
-
-## 1:35–1:55 — Verification, second kind of authoring (shot 7a)
-
-**Visual:** Next issue: hero image with no text alternative. `propose_fix` →
-`needs_input` again; agent authors `altText` in prose from `nearbyText`.
-Approve. Then a contrast failure: patch arrives with measured before/after
-ratio in `evidence`, no round-trip needed. Approve. Score rises each time.
-
-**Voiceover:** NARRATION §04.
-
-## 1:55–2:15 — Montage to 100 (shot 7b)
-
-**Visual:** Jump cuts only here. Show one SEO fix (agent-authored meta
-description via `needs_input`) and one performance fix (image dimensions,
-engine-measured). Land on **"All 23 fixed"**, chips **0 · 0 · 0**, header
-"9 WebMCP tools live"; agent log shows `re_scan` → overall **100**, per-pack
-**100 / 100 / 100**. (Undo is optional here; history lists 23 approved changes.)
-
-**Voiceover:** NARRATION §05, first two sentences.
-
-## 2:15–2:40 — Export + close (shots 8–9)
-
-**Visual:** Agent calls `export_patch({ format: "diff" })`. Diff preview.
-Closing frame: live URL + public repository URL (if published) + "Human
-judgment + agent speed. That's WebMCP."
-
-**Voiceover:** NARRATION §05, remaining sentences.
-
-## Recording checklist
-
-- The 2026-09-03 recording was produced exactly this way: Chrome 152 headless
-  driven over the native CDP `WebMCP.*` domain against the deployed URL, real
-  screencast frames (no stills), TTS narration from NARRATION.txt, `mov_text`
-  captions. Only the 1:55–2:15 montage is time-compressed (≈0.9×; the 20 fixes
-  took 15 s real time).
-
-- 1920×1080, browser zoom 100%, light theme, no extensions visible.
-- Flag enabled; confirm `document.modelContext` exists before recording.
-- Show each tool name at least once in the agent transcript.
-- Record the Approve click live; never fake it in editing.
-- Jump cuts only in the 1:55–2:15 montage, never in the core needs_input →
-  apply_fix → Approve flow.
-- Fallback if external agent misbehaves: **Watch the agent work** button. It is
-  a real WebMCP client (`getTools`/`executeTool`); the header then reads
-  "agent via WebMCP". Say so in the voiceover if used.
-- Captions embedded (mov_text) + SRT sidecar; clear audio; end < 2:50.
+```
+files/sightline-launch/record2.py     # drives prod over CDP WebMCP.*, logs events.json + 4K stills
+files/sightline-launch/remotion/       # composition: src/Launch.tsx, timing from events.json + music-analysis.json
+files/sightline-launch/vo/             # lines.json → synth.py (Kokoro) → L01…L18.wav, vo.json, captions.srt
+```
+(These live in the maintainer's session workspace; the composition is
+deterministic given the recorded event log.)

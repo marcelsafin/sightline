@@ -1,7 +1,7 @@
 # Demo video — upload sheet
 
-File (session workspace, not in repo): `files/sightline-launch/remotion/out/sightline-launch.mp4`
-2:46 · 1920×1080 · H.264 (CRF 16) / AAC 256k · −14.9 LUFS · no voiceover, music-led.
+File (session workspace, not in repo): `files/sightline-launch/sightline-launch-vo.mp4`
+2:46 · 1920×1080 · H.264 (CRF 16) / AAC 256k · −15.8 LUFS · synthesized narration (18 lines) over the maintainer's own track. Shot list: `submission/DEMO_SCRIPT.md`.
 
 How it was made (truthfully reproducible — `files/sightline-launch/`):
 - `record2.py` drives https://sightline-5vu.pages.dev as an external WebMCP agent over
@@ -10,6 +10,8 @@ How it was made (truthfully reproducible — `files/sightline-launch/`):
 - `remotion/` is a Remotion composition: real screencast + stills, punch-ins, tool-call
   callouts generated from `events.json`, score HUD from the real `apply_fix` responses,
   cut to the beat grid of the maintainer's own track (`music-launch.wav`, 88.5 BPM).
+- `vo/` narration: Kokoro-82M (`af_heart`) from `lines.json`, ≤1.1× tempo, −16.5 LUFS,
+  music ducked underneath; `captions.srt` carries the same 18 lines.
 - Only the 89–103 s and 125–136 s montages are time-compressed (1.4× / 1.8× / 1.23×).
   Every other frame is real time. Nothing is mocked or drawn.
 
@@ -21,7 +23,7 @@ An agent finds what holds a page back, drafts the fix, and stops. Nothing ships 
 
 Sightline exposes nine WebMCP tools across three rule packs (accessibility via axe-core, SEO, performance). When a fix needs words — alt text, a label, a role, a title — the engine returns needs_input and the agent authors them from the page context; contrast, heading levels and image dimensions are measured from the live DOM. Every apply_fix call pauses until a person approves. 23 problems → 100 / 100 / 100, then export only the approved work.
 
-Every frame is the deployed app driven by a real external agent through Chrome's native WebMCP surface. Tool-call captions are generated from the recorded WebMCP event log. Two montages are time-compressed; nothing is mocked.
+Every frame is the deployed app driven by a real external agent through Chrome's native WebMCP surface. Tool-call captions are generated from the recorded WebMCP event log. Two montages are time-compressed; nothing is mocked. Narration is a synthesized voice reading our script.
 
 Live: https://sightline-5vu.pages.dev
 Source (MIT): https://github.com/marcelsafin/sightline
@@ -31,5 +33,5 @@ Built for the OpenAI WebMCP Challenge.
 WebMCP, OpenAI, accessibility, axe-core, human-in-the-loop, AI agents, Chrome, web standards, SEO, Core Web Vitals
 
 **Settings**
-Visibility: Public (required by the challenge) · Not made for kids · Music: maintainer's own composition, all rights held.
+Visibility: Public (required by the challenge) · Not made for kids · Music: maintainer's own composition, all rights held · Captions: upload `vo/captions.srt` (English).
 After upload: paste the URL into `submission/DEVPOST.md` line "Demo video:".
